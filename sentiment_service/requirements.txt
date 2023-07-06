@@ -1,0 +1,9 @@
+beautifulsoup4==4.12.2
+nltk==3.8.1
+numpy==1.25.0
+openai==0.27.8
+pandas==2.0.3
+Requests==2.31.0
+spacy==3.5.4
+SQLAlchemy==2.0.17
+thinc==8.1.10
