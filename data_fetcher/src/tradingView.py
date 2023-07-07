@@ -141,8 +141,7 @@ def get_quotes(pair, market):
 
 
 def get_available_tickers():
-    engine = create_engine('postgresql+psycopg2://dev:dev\
-@172.17.0.1:5432/dev')
+    engine = create_engine(config.DB)
     query = """
     SELECT stock_id, name FROM stock
     """

@@ -26,7 +26,7 @@ def get_data(
         pd.DataFrame: dataframe with the data
     """
     
-    data = yf.download(tickers= tickers, period = "7d", interval = "1m") 
+    data = yf.download(tickers= tickers, period = "7d", interval = "1m", **kwargs)
     data = data.stack().reset_index()
     cols = ["Datetime", "level_1", "Close", "Volume"]
     data = data[cols].copy()

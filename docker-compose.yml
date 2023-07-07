@@ -56,6 +56,17 @@ services:
         condition: service_started
       data_preloader:
         condition: service_completed_successfully
+
+  model:
+    restart: unless-stopped
+    build:
+      context: ./model
+      dockerfile: Dockerfile
+    depends_on:
+      timescale:
+        condition: service_started
+      data_preloader:
+        condition: service_completed_successfully
     
 
 volumes:

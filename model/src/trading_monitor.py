@@ -146,3 +146,11 @@ def get_latest_value(stock_id:str, engine = create_engine(config.DB)) -> float:
         return value
     except Exception as e:
         return print(e)
+    
+def get_available_tickers():
+    engine = create_engine(config.DB)
+    query = """
+    SELECT stock_id, name FROM stock
+    """
+    available_tickers = pd.read_sql(query,engine)
+    return available_tickers.to_dict()

@@ -9,7 +9,7 @@ def get_single_quotes(ticker, exchange):
     get_quotes(ticker, exchange)
     return 
 
-
+ 
 if __name__ == '__main__':
     
     ticker_dict = get_available_tickers()

@@ -25,5 +25,5 @@ if __name__ == '__main__':
         #create process
         process = Process(target=main_process, args=(ticker,))
         process_list.append(process)
-        time.sleep(1)
+        time.sleep(config.SLEEP_TIME)
         process.start()
