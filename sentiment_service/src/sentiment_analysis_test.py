@@ -1,4 +1,5 @@
 #### /////////////////////////////////////// [INIT] From Prakash Modified ///////////////////////////////////////////////
+### Log: engineered the prompt for better results and tunned chat parameters for reproducibility
 
 import os
 import openai
