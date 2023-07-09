@@ -1,3 +1,5 @@
+#### /////////////////////////////////////// [INIT] From Mario ///////////////////////////////////////////////
+
 # Importing libraries
 
 import yfinance as yf
@@ -32,6 +34,8 @@ def get_data(
     data.columns = ["dt", "stock_id", "value", "volume"]
     return data
 
+
+
 def save_data(data:pd.DataFrame, table_name:str) -> None:
     data.to_sql(table_name, engine, if_exists="append", index=False)
     return print("Data saved to database")
@@ -60,3 +64,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+    
+
+
+#### /////////////////////////////////////// [END] From Mario ///////////////////////////////////////////////

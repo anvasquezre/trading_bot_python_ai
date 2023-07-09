@@ -1,3 +1,5 @@
+#### /////////////////////////////////////// [INIT] From Mario ///////////////////////////////////////////////
+
 import pandas as pd
 from sqlalchemy import create_engine
 from trading_monitor import get_candles,add_tradingview_metrics, get_available_tickers
@@ -69,3 +71,6 @@ if __name__ == "__main__":
             process_list.append(process)
             time.sleep(config.SLEEP_INTERVAL)
             process.start()
+            
+            
+#### /////////////////////////////////////// [END] From Mario ///////////////////////////////////////////////

@@ -1,3 +1,5 @@
+#### /////////////////////////////////////// [INIT] From Prakash Modified ///////////////////////////////////////////////
+
 import os
 import openai
 import re
@@ -63,3 +65,6 @@ def analyze_sentiment(article):
     response_dict = json.loads(response_model.choices[0].message.content.replace('\n',' ').strip())
 
     return response_dict
+
+
+#### /////////////////////////////////////// [END] From Prakash Modified ///////////////////////////////////////////////
