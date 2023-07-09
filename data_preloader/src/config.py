@@ -22,3 +22,5 @@ TICKERS = {'USDCHF': "CHF=X",
     'NZDJPY': "NZDJPY=X",
     'NZDUSD': "NZDUSD=X",
     }
+
+DB='postgresql+psycopg2://dev:dev@172.17.0.1:5432/dev'

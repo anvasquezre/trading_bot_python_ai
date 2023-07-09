@@ -6,8 +6,7 @@ from typing import Optional, List, Dict, Union
 from sqlalchemy import create_engine, MetaData
 import config
 
-engine = create_engine('postgresql+psycopg2://dev:dev@172.17.0.1:5432/dev')
-print("Connected to database")
+engine = create_engine(config.DB)
 metadata = MetaData()
 metadata.reflect(bind=engine)
 prices = metadata.tables['stocks_real_time']
