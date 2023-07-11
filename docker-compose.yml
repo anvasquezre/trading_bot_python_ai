@@ -67,9 +67,20 @@ services:
         condition: service_started
       data_preloader:
         condition: service_completed_successfully
-    
+
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
 
 volumes:
+  dbdata6: 
   timescale:
 
 
