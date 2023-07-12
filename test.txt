@@ -1,1 +1,0 @@
-{"Federal Reserve":{-5},"U.S. central bank":-3,"Michele Morra":{-4},"Jay Hatfield":{6},"Andrew Bell":{0},"Witan Investment Trust":{0},"S&amp;P 500":{-3},"Infrastructure Capital Advisors":{6},"Analysts":{-2},"FactSet":{0},"JPMorgan Chase &amp; Co.":-2,"Jamie Dimon":{-2},"Liz Young":{-4},"SoFi":{-1}}.

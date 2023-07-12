@@ -1,0 +1,83 @@
+.
+├── api
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── middleware.py
+│   ├── README.md
+│   ├── requirements.txt
+│   └── settings.py
+├── data_fetcher
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── README.md
+│   ├── requirements.txt
+│   └── src
+│       ├── config.py
+│       ├── __init__.py
+│       ├── main.py
+│       ├── __pycache__
+│       │   ├── config.cpython-310.pyc
+│       │   ├── tickers.cpython-310.pyc
+│       │   └── tradingView.cpython-310.pyc
+│       └── tradingView.py
+├── data_preloader
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   └── __init__.cpython-310.pyc
+│   ├── README.md
+│   ├── requirements.txt
+│   └── src
+│       ├── config.py
+│       ├── health_check.py
+│       ├── __init__.py
+│       ├── main.py
+│       └── __pycache__
+│           ├── __init__.cpython-310.pyc
+│           └── main.cpython-310.pyc
+├── db
+│   ├── init.sql
+│   └── README.md
+├── docker-compose.yml
+├── EDA.ipynb
+├── model
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── README.md
+│   ├── requirements.txt
+│   └── src
+│       ├── config.py
+│       ├── __init__.py
+│       ├── main.py
+│       ├── __pycache__
+│       │   ├── config.cpython-310.pyc
+│       │   ├── signals.cpython-310.pyc
+│       │   └── trading_monitor.cpython-310.pyc
+│       ├── signals.py
+│       └── trading_monitor.py
+├── README.md
+├── requirements.txt
+├── sentiment_service
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   └── sentiment_analysis_test.cpython-310.pyc
+│   ├── README.md
+│   ├── requirements.txt
+│   └── src
+│       ├── config.py
+│       ├── __init__.py
+│       ├── main.py
+│       ├── news_scrapper.py
+│       ├── __pycache__
+│       │   ├── config.cpython-310.pyc
+│       │   ├── __init__.cpython-310.pyc
+│       │   ├── news_scrapper.cpython-310.pyc
+│       │   ├── sentiment_analysis_test.cpython-310.pyc
+│       │   └── text_normalizer.cpython-310.pyc
+│       ├── sentiment_analysis_test.py
+│       └── text_normalizer.py
+└── tree.txt
+
+16 directories, 65 files

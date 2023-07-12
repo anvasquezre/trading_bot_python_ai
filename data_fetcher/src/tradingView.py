@@ -2,16 +2,14 @@ import json
 import random
 import re
 import string
+
+import config
+import pandas as pd
 import requests
+from sqlalchemy import MetaData, create_engine, text
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import query
 from websocket import create_connection
-import pandas as pd
-import config
-
-from sqlalchemy import MetaData, text
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import create_engine
-
 
 
 def search(query, type):
@@ -60,7 +58,7 @@ def sendPingPacket(ws, result):
         ws.send("~m~" + str(len(pingStr)) + "~m~" + pingStr)
 
 
-def socketJob(ws,pair,engine):
+def socketJob(ws, pair, engine):
     while True:
         try:
             result = ws.recv()
@@ -73,20 +71,26 @@ def socketJob(ws,pair,engine):
                     symbol = jsonRes["p"][1]["n"]
                     price = jsonRes["p"][1]["v"]["lp"]
                     volume = jsonRes["p"][1]["v"]["volume"]
-                    
+
                     if price and volume:
                         print(f"{symbol} -> {price} -> {volume}")
-                        
+
                         with engine.connect() as conn:
                             try:
-                                stock_id = conn.execute(text(f"SELECT stock_id FROM stock WHERE stock_id LIKE '%{pair}%'")).fetchone()
+                                stock_id = conn.execute(
+                                    text(
+                                        f"SELECT stock_id FROM stock WHERE stock_id LIKE '%{pair}%'"
+                                    )
+                                ).fetchone()
                                 stock_id = stock_id[0]
-                                id=conn.execute(text(
-                                    f"INSERT INTO stocks_real_time (dt, stock_id, value, volume) VALUES (now(), '{stock_id}', {price}, {volume})"
-                                ))
+                                id = conn.execute(
+                                    text(
+                                        f"INSERT INTO stocks_real_time (dt, stock_id, value, volume) VALUES (now(), '{stock_id}', {price}, {volume})"
+                                    )
+                                )
                                 conn.commit()
                             except SQLAlchemyError as e:
-                                    error = str(e)
+                                error = str(e)
             else:
                 # ping packet
                 sendPingPacket(ws, result)
@@ -94,7 +98,7 @@ def socketJob(ws,pair,engine):
             print("\nGoodbye!")
             exit(0)
         except Exception as e:
-            #print(f"ERROR: {e}\nTradingView message: {result}")
+            # print(f"ERROR: {e}\nTradingView message: {result}")
             continue
 
 
@@ -112,14 +116,13 @@ def getSymbolId(pair, market):
 
 def get_quotes(pair, market):
     # serach btcusdt from crypto category
-    
-    engine = create_engine(config.DB)
 
+    engine = create_engine(config.DB)
 
     print("Connected to database")
     metadata = MetaData()
     metadata.reflect(bind=engine)
-    prices = metadata.tables['stocks_real_time']
+    prices = metadata.tables["stocks_real_time"]
     print("Getting symbols IDs...\n")
     symbol_id = getSymbolId(pair, market)
     print("Starting WebSocket Connection!\n")
@@ -132,12 +135,12 @@ def get_quotes(pair, market):
 
     # Send messages
     sendMessage(ws, "quote_create_session", [session])
-    sendMessage(ws, "quote_set_fields", [session, "lp","volume"])
+    sendMessage(ws, "quote_set_fields", [session, "lp", "volume"])
     sendMessage(ws, "quote_add_symbols", [session, symbol_id])
 
     # Start job
     print(f"Starting data retrieval for {symbol_id}\n")
-    socketJob(ws,pair,engine)
+    socketJob(ws, pair, engine)
 
 
 def get_available_tickers():
@@ -145,7 +148,7 @@ def get_available_tickers():
     query = """
     SELECT stock_id, name FROM stock
     """
-    available_tickers = pd.read_sql(query,engine)
+    available_tickers = pd.read_sql(query, engine)
     return available_tickers.to_dict()
 
 

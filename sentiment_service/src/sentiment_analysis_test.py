@@ -1,22 +1,23 @@
 #### /////////////////////////////////////// [INIT] From Prakash Modified ///////////////////////////////////////////////
 ### Log: engineered the prompt for better results and tunned chat parameters for reproducibility
 
-import os
-import openai
-import re
 import json
-from openai.error import RateLimitError
+import os
+import re
 from collections import defaultdict
+
+import openai
 import tiktoken
+from openai.error import RateLimitError
+
 # Use the OpenAI API key to authenticate
 openai.api_key = "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"
 MODEL = "gpt-3.5-turbo"
 
+
 def analyze_sentiment(article):
-    
     # Extract the article content
     content = article
-
 
     # Prepare the system message
     system_message = """You are a news article sentiment analysis model. It identifies companies and associated sentiment from news articles. 
@@ -32,7 +33,7 @@ def analyze_sentiment(article):
     suggestion_prompt = "{<company_name>:{sentiment_score}, : <sentiment_score>:{sentiment_score},<category>:{category}"
     # Extract the article content
     content = article
-    
+
     # Calculate the number of tokens in the content (approximate)
     encoder = tiktoken.encoding_for_model(MODEL)
     num_tokens = len(encoder.encode(content + suggestion_prompt + system_message))
@@ -45,7 +46,7 @@ def analyze_sentiment(article):
         {"role": "user", "content": content},
     ]
     # Send the messages to the model
-    
+
     try:
         response_model = openai.ChatCompletion.create(
             model=MODEL,  # Using the gpt-3.5-turbo model
@@ -58,12 +59,13 @@ def analyze_sentiment(article):
         print("Hit rate limit, please try again later.")
         return {}  # Return an empty dictionary to signify failure
 
-
     # The model's response will be in the message content of the last choice
     model_response = response_model.choices[0].message.content.strip()
 
     # Example response from the model: {"S&P 500": {"sentiment_score": -5, "category": "normal"}\n}
-    response_dict = json.loads(response_model.choices[0].message.content.replace('\n',' ').strip())
+    response_dict = json.loads(
+        response_model.choices[0].message.content.replace("\n", " ").strip()
+    )
 
     return response_dict
 

@@ -1,7 +1,6 @@
 import time
+
 from sqlalchemy import create_engine
-
-
 
 # def main():
 #     while True:
