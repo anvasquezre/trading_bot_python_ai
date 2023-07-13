@@ -1,4 +1,4 @@
-# tradingView-API
+# Synapse-Data Engineering
 **Overall description**
 
 Tradingview socket api for fetching real time prices and news and creating buy and sell signals based on live candle data. All data is stored them in mongodb as timeseries data or simple collections.
